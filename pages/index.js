@@ -4,6 +4,7 @@ import EventList from "../components/events/event-list";
 // import { getFeaturedEvents } from "../dummy-data";
 import { getFeaturedEvents } from "../helpers/api-util";
 import Head from "next/head";
+import NewsletterRegistration from "../components/input/newsletter-registration";
 
 function StartingPage(props) {
   const router = useRouter();
@@ -30,6 +31,7 @@ function StartingPage(props) {
         pathname: <span className='router'>{pathname}</span>
       </h3>
       <hr />
+      <NewsletterRegistration />
       <EventList items={featuredEvents} />
     </div>
   );
