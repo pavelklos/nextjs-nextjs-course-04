@@ -11,6 +11,7 @@ import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
 import ErrorAlert from "../../components/ui/error-alert";
+import Head from "next/head";
 
 function EventDetailPage(props) {
   const router = useRouter();
@@ -36,6 +37,10 @@ function EventDetailPage(props) {
 
   return (
     <div>
+      <Head>
+        <title>NextJS Events : {event.title}</title>
+        <meta name='description' content={event.description} />
+      </Head>
       <h2>Event Detail (show selected Event)</h2>
       <h3>
         pathname: <span className='router'>{pathname}</span>

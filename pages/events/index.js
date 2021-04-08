@@ -5,6 +5,7 @@ import EventList from "../../components/events/event-list";
 import EventsSearch from "../../components/events/events-search";
 // import { getAllEvents } from "../../dummy-data";
 import { getAllEvents } from "../../helpers/api-util";
+import Head from "next/head";
 
 function EventsPage(props) {
   const router = useRouter();
@@ -23,6 +24,13 @@ function EventsPage(props) {
 
   return (
     <Fragment>
+      <Head>
+        <title>NextJS Events : All Events</title>
+        <meta
+          name='description'
+          content='Find a lot of great events that allow you to evolve...'
+        />
+      </Head>
       <h2>All Events (show all Events)</h2>
       <h3>
         pathname: <span className='router'>{pathname}</span>

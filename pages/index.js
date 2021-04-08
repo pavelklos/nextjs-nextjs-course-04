@@ -3,6 +3,7 @@ import { useRouter, withRouter } from "next/router";
 import EventList from "../components/events/event-list";
 // import { getFeaturedEvents } from "../dummy-data";
 import { getFeaturedEvents } from "../helpers/api-util";
+import Head from "next/head";
 
 function StartingPage(props) {
   const router = useRouter();
@@ -17,6 +18,13 @@ function StartingPage(props) {
 
   return (
     <div>
+      <Head>
+        <title>NextJS Events : Home Page</title>
+        <meta
+          name='description'
+          content='Find a lot of great events that allow you to evolve...'
+        />
+      </Head>
       <h2>Home Page (show featured Events)</h2>
       <h3>
         pathname: <span className='router'>{pathname}</span>

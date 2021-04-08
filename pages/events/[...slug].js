@@ -8,6 +8,7 @@ import ErrorAlert from "../../components/ui/error-alert";
 import { Fragment, useEffect, useState } from "react";
 import Button from "../../components/ui/button";
 import useSWR from "swr";
+import Head from "next/head";
 
 function FilteredEventsPage(props) {
   const [loadedEvents, setLoadedEvents] = useState();
@@ -38,11 +39,24 @@ function FilteredEventsPage(props) {
   }, [data]); // ON INITIAL RENDER + DEPENDENCY 'data'
   // SWR : GET ALL EVENTS ******************************************************
 
+  // REUSABLE React Component for HEAD
+  let pageHeadData = (
+    <Head>
+      <title>NextJS Events : Filtered Events</title>
+      <meta name='description' content={`A list of filtered events.`} />
+    </Head>
+  );
+
   // if (!filterData) {
   //   return <p className='center'>Loading...</p>;
   // }
   if (!loadedEvents) {
-    return <p className='center'>Loading...</p>;
+    return (
+      <Fragment>
+        {pageHeadData}
+        <p className='center'>Loading...</p>
+      </Fragment>
+    );
   }
 
   const filteredYear = filterData[0];
@@ -50,6 +64,17 @@ function FilteredEventsPage(props) {
 
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
+
+  // REUSABLE React Component for HEAD
+  pageHeadData = (
+    <Head>
+      <title>NextJS Events : Filtered Events</title>
+      <meta
+        name='description'
+        content={`All events for ${numMonth}/${numYear}.`}
+      />
+    </Head>
+  );
 
   if (
     // props.hasError
@@ -63,6 +88,7 @@ function FilteredEventsPage(props) {
   ) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
@@ -91,6 +117,7 @@ function FilteredEventsPage(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>
@@ -106,6 +133,7 @@ function FilteredEventsPage(props) {
 
   return (
     <Fragment>
+      {pageHeadData}
       <h2>Filtered Events (show filtered Events)</h2>
       <h3>
         pathname: <span className='router'>{pathname}</span>
